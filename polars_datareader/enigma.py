@@ -1,7 +1,7 @@
 import os
 import time
 
-import pandas as pd
+from polars import read_csv
 
 from polars_datareader.base import _BaseReader, string_types
 from polars_datareader.compat import StringIO
@@ -97,7 +97,7 @@ class EnigmaReader(_BaseReader):
         snapshot_id = self.get_current_snapshot_id(self._dataset_id)
         exported_data = self.get_snapshot_export(snapshot_id)  # TODO: Retry?
         decoded_data = exported_data.decode("utf-8")
-        return pd.read_csv(StringIO(decoded_data))
+        return read_csv(StringIO(decoded_data))
 
     def _get(self, url):
         """HTTP GET Request with Retry Logic"""
