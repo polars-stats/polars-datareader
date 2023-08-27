@@ -1,7 +1,7 @@
-# pandas-datareader
+#  polars-datareader
 
-Up to date remote data access for pandas, works for multiple versions of
-pandas.
+Up to date remote data access for polars, works for multiple versions of
+polars.
 
 [![image](https://img.shields.io/pypi/v/pandas-datareader.svg)](https://pypi.python.org/pypi/pandas-datareader/)
 [![image](https://codecov.io/gh/pydata/pandas-datareader/branch/master/graph/badge.svg)](https://codecov.io/gh/pydata/pandas-datareader)
@@ -14,13 +14,13 @@ pandas.
 Install using `pip`
 
 ``` shell
-pip install pandas-datareader
+pip3 install polars-datareader
 ```
 
 ## Usage
 
 ``` python
-import pandas_datareader as pdr
+import polars_datareader as pdr
 pdr.get_data_fred('GS10')
 ```
 
