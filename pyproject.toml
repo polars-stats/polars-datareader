@@ -25,7 +25,9 @@ classifiers = [
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=1.25",
-    "polars"
+    "polars",
+    "lxml",
+    "requests>=2.19.0"
 ]
 dynamic = ["version"]
 
