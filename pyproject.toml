@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "polars-datareader"
+description = "Polars-compatible data readers. Formerly a component of polars."
+readme = "README.md"
+authors = [
+    { name = "The PyData Development Team", email  = "pydata@googlegroups.com" }
+]
+license = { file = "LICENSE.md" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.25",
+    "polars"
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.3.0"
+]
+
+[project.urls]
+"Bug Tracker" = https://github.com/pydata/pandas-datareader/issues
+"Documentation" = http://pydata.github.io/pandas-datareader
+"Source Code" = https://github.com/pydata/pandas-datareader
+
+[tool.setuptools.packages.find]
+include = ["polars-datareader"]
