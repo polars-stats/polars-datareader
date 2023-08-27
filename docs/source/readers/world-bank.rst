@@ -1,7 +1,7 @@
 World Bank
 ----------
 
-.. py:module:: pandas_datareader.wb
+.. py:module:: polars_datareader.wb
 
 .. autoclass:: WorldBankReader
    :members:

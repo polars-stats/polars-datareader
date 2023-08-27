@@ -29,8 +29,8 @@ Below is an example with Yahoo! Finance. The session parameter is implemented fo
 .. ipython:: python
     :okexcept:
 
-    import pandas_datareader.data as web
-    from pandas_datareader.yahoo.headers import DEFAULT_HEADERS
+    import polars_datareader.data as web
+    from polars_datareader.yahoo.headers import DEFAULT_HEADERS
     import datetime
     import requests_cache
     expire_after = datetime.timedelta(days=3)

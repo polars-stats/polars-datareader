@@ -1,25 +1,25 @@
 The Investors Exchange (IEX)
 ----------------------------
 
-.. py:module:: pandas_datareader.iex.daily
+.. py:module:: polars_datareader.iex.daily
 
 .. autoclass:: IEXDailyReader
    :members:
    :inherited-members:
 
-.. py:module:: pandas_datareader.iex.market
+.. py:module:: polars_datareader.iex.market
 
 .. autoclass:: MarketReader
    :members:
    :inherited-members:
 
-.. py:module:: pandas_datareader.iex.ref
+.. py:module:: polars_datareader.iex.ref
 
 .. autoclass:: SymbolsReader
    :members:
    :inherited-members:
 
-.. py:module:: pandas_datareader.iex.stats
+.. py:module:: polars_datareader.iex.stats
 
 .. autoclass:: DailySummaryReader
    :members:
@@ -37,13 +37,13 @@ The Investors Exchange (IEX)
    :members:
    :inherited-members:
 
-.. py:module:: pandas_datareader.iex.deep
+.. py:module:: polars_datareader.iex.deep
 
 .. autoclass:: Deep
    :members:
    :inherited-members:
 
-.. py:module:: pandas_datareader.iex.tops
+.. py:module:: polars_datareader.iex.tops
 
 .. autoclass:: TopsReader
    :members:

@@ -1,7 +1,7 @@
 Thrift Savings Plan (TSP)
 -------------------------
 
-.. py:module:: pandas_datareader.tsp
+.. py:module:: polars_datareader.tsp
 
 .. autoclass:: TSPReader
    :members:

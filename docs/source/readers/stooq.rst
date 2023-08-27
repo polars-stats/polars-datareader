@@ -1,7 +1,7 @@
 Stooq.com
 ---------
 
-.. py:module:: pandas_datareader.stooq
+.. py:module:: polars_datareader.stooq
 
 .. autoclass:: StooqDailyReader
    :members:

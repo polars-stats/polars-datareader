@@ -1,7 +1,7 @@
 Enigma
 ------
 
-.. py:module:: pandas_datareader.enigma
+.. py:module:: polars_datareader.enigma
 
 .. autoclass:: EnigmaReader
    :members:

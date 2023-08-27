@@ -26,7 +26,7 @@ of 10-year constant maturity yields on U.S. government bonds.
 
 .. code-block:: python
 
-   import pandas_datareader as pdr
+   import polars_datareader as pdr
    pdr.get_data_fred('GS10')
 
 

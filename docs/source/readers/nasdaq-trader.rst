@@ -1,6 +1,6 @@
 NASDAQ
 ------
 
-.. py:module:: pandas_datareader.nasdaq_trader
+.. py:module:: polars_datareader.nasdaq_trader
 
 .. autofunction:: get_nasdaq_symbols

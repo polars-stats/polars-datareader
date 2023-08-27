@@ -1,6 +1,6 @@
 .. _remote_data:
 
-.. currentmodule:: pandas_datareader
+.. currentmodule:: polars_datareader
 
 .. ipython:: python
    :suppress:
@@ -23,7 +23,7 @@ Remote Data Access
 
 .. _remote_data.data_reader:
 
-Functions from :mod:`pandas_datareader.data` and :mod:`pandas_datareader.wb`
+Functions from :mod:`polars_datareader.data` and :mod:`polars_datareader.wb`
 extract data from various Internet sources into a pandas DataFrame.
 Currently the following sources are supported:
 
@@ -60,7 +60,7 @@ writing).
 .. code-block:: ipython
 
    In [1]: import os
-   In [2]: import pandas_datareader as pdr
+   In [2]: import polars_datareader as pdr
 
    In [3]: df = pdr.get_data_tiingo('GOOG', api_key=os.getenv('TIINGO_API_KEY'))
    In [4]: df.head()
@@ -86,7 +86,7 @@ prices are available for up to 15 years. The usage of these readers requires the
 
 .. code-block:: ipython
 
-    In [1]: import pandas_datareader.data as web
+    In [1]: import polars_datareader.data as web
 
     In [2]: from datetime import datetime
 
@@ -120,7 +120,7 @@ A third interface to the deep API is exposed through
 
 .. code-block:: ipython
 
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
     f = web.DataReader('gs', 'iex-tops')
     f[:10]
 
@@ -158,7 +158,7 @@ The following endpoints are available:
 
     In [2]: from datetime import datetime
 
-    In [3]: import pandas_datareader.data as web
+    In [3]: import polars_datareader.data as web
 
     In [4]: f = web.DataReader("AAPL", "av-daily", start=datetime(2017, 2, 9),
        ...:                    end=datetime(2017, 5, 24),
@@ -195,7 +195,7 @@ once. These quotes are accessible through the top-level function
 
     In [2]: from datetime import datetime
 
-    In [3]: import pandas_datareader.data as web
+    In [3]: import polars_datareader.data as web
 
     In [4]: web.get_quote_av(["AAPL", "TSLA"])
     Out[4]:
@@ -221,7 +221,7 @@ as "FROM/TO" as in "USD/JPY".
 
     In [1]: import os
 
-    In [2]: import pandas_datareader.data as web
+    In [2]: import polars_datareader.data as web
 
     In [3]: f = web.DataReader("USD/JPY", "av-forex",
         ...:                    api_key=os.getenv('ALPHAVANTAGE_API_KEY'))
@@ -246,7 +246,7 @@ Multiple pairs are are allowable:
 
     In [1]: import os
 
-    In [2]: import pandas_datareader.data as web
+    In [2]: import polars_datareader.data as web
 
     In [3]: f = web.DataReader(["USD/JPY", "BTC/CNY"], "av-forex",
        ...:                    api_key=os.getenv('ALPHAVANTAGE_API_KEY'))
@@ -277,7 +277,7 @@ performances through the top-level function ``get_sector_performance_av``.
 
     In [1]: import os
 
-    In [2]: import pandas_datareader.data as web
+    In [2]: import polars_datareader.data as web
 
     In [3]: web.get_sector_performance_av().head()
     Out[4]:
@@ -306,7 +306,7 @@ for United States, is as simple as taking the ticker segment from the URL path
 .. code-block:: ipython
 
     import os
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
 
     f = web.DataReader('ticker=RGDPUS', 'econdb')
     f.head()
@@ -320,7 +320,7 @@ such as the Eurostat's `GDP and main components <https://www.econdb.com/dataset/
 .. code-block:: ipython
 
     import os
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
 
     df = web.DataReader('dataset=NAMQ_10_GDP&v=Geopolitical entity (reporting)&h=TIME&from=2018-05-01&to=2021-01-01&GEO=[AL,AT,BE,BA,BG,HR,CY,CZ,DK,EE,EA19,FI,FR,DE,EL,HU,IS,IE,IT,XK,LV,LT,LU,MT,ME,NL,MK,NO,PL,PT,RO,RS,SK,SI,ES,SE,CH,TR,UK]&NA_ITEM=[B1GQ]&S_ADJ=[SCA]&UNIT=[CLV10_MNAC]', 'econdb')
     df.columns
@@ -346,7 +346,7 @@ For example, the following code downloads from  `USDA Food Recalls 1996 Data <ht
 
     In [1]: import os
 
-    In [2]: import pandas_datareader as pdr
+    In [2]: import polars_datareader as pdr
 
     In [3]: df = pdr.get_data_enigma('292129b0-1275-44c8-a6a3-2a0881f24fe1', os.getenv('ENIGMA_API_KEY'))
 
@@ -383,7 +383,7 @@ the data quality is not always good.
 
 .. code-block:: ipython
 
-    In [1]: import pandas_datareader.data as web
+    In [1]: import polars_datareader.data as web
 
     In [2]: symbol = 'WIKI/AAPL'  # or 'AAPL.US'
 
@@ -403,7 +403,7 @@ FRED
 
 .. ipython:: python
 
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
     import datetime
     start = datetime.datetime(2010, 1, 1)
     end = datetime.datetime(2013, 1, 27)
@@ -426,8 +426,8 @@ The ``get_available_datasets`` function returns a list of all available datasets
 
 .. ipython:: python
 
-    from pandas_datareader.famafrench import get_available_datasets
-    import pandas_datareader.data as web
+    from polars_datareader.famafrench import get_available_datasets
+    import polars_datareader.data as web
     len(get_available_datasets())
     ds = web.DataReader('5_Industry_Portfolios', 'famafrench')
     print(ds['DESCR'])
@@ -453,7 +453,7 @@ constant dollars in North America, you would use the ``search`` function:
 
 .. code-block:: python
 
-    In [1]: from pandas_datareader import wb
+    In [1]: from polars_datareader import wb
     In [2]: matches = wb.search('gdp.*capita.*const')
 
 
@@ -561,7 +561,7 @@ The ``country`` argument accepts a string or list of mixed
 `two <http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`__ or `three <http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3>`__ character
 ISO country codes, as well as dynamic `World Bank exceptions <https://datahelpdesk.worldbank.org/knowledgebase/articles/898590-api-country-queries>`__ to the ISO standards.
 
-For a list of the the hard-coded country codes (used solely for error handling logic) see ``pandas_datareader.wb.country_codes``.
+For a list of the the hard-coded country codes (used solely for error handling logic) see ``polars_datareader.wb.country_codes``.
 
 Problematic Country Codes & Indicators
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -614,7 +614,7 @@ example is to download 'Trade Union Density' data which set code is 'TUD'.
 
 .. ipython:: python
 
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
     import datetime
 
     df = web.DataReader('TUD', 'oecd')
@@ -638,7 +638,7 @@ You can specify dataset ID 'tran_sf_railac' to get corresponding data via ``Data
 
 .. ipython:: python
 
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
 
     df = web.DataReader('tran_sf_railac', 'eurostat')
     df
@@ -652,7 +652,7 @@ Download mutual fund index prices for the Thrift Savings Plan (TSP).
 
 .. ipython:: python
 
-    import pandas_datareader.tsp as tsp
+    import polars_datareader.tsp as tsp
     tspreader = tsp.TSPReader(start='2015-10-1', end='2015-12-31')
     tspreader.read()
 
@@ -669,7 +669,7 @@ available. More information on the `field <http://www.nasdaqtrader.com/trader.as
 
 .. code-block:: python
 
-    In [12]: from pandas_datareader.nasdaq_trader import get_nasdaq_symbols
+    In [12]: from polars_datareader.nasdaq_trader import get_nasdaq_symbols
     In [13]: symbols = get_nasdaq_symbols()
     In [14]: print(symbols.loc['IBM'])
         Nasdaq Traded                                                    True
@@ -694,7 +694,7 @@ Google finance doesn't provide common index data download. The Stooq site has th
 
 .. ipython:: python
 
-    import pandas_datareader.data as web
+    import polars_datareader.data as web
     f = web.DataReader('^DJI', 'stooq')
     f[:10]
 
@@ -704,12 +704,12 @@ MOEX Data
 =========
 The Moscow Exchange (MOEX) provides historical data.
 
-``pandas_datareader.get_data_moex(*args)`` is equivalent to
-``pandas_datareader.moex.MoexReader(*args).read()``
+``polars_datareader.get_data_moex(*args)`` is equivalent to
+``polars_datareader.moex.MoexReader(*args).read()``
 
 .. ipython:: python
 
-   import pandas_datareader as pdr
+   import polars_datareader as pdr
    f = pdr.get_data_moex(['USD000UTSTOM', 'MAGN'], '2020-07-02', '2020-07-07')
    f.head()
 
@@ -728,7 +728,7 @@ Naver Finance Data
 
 .. ipython:: python
 
-   import pandas_datareader.data as web
+   import polars_datareader.data as web
    df = web.DataReader('005930', 'naver', start='2019-09-10', end='2019-10-09')
    df.head()
 
@@ -749,7 +749,7 @@ The following endpoints are available:
 
 .. ipython:: python
 
-   import pandas_datareader.data as web
+   import polars_datareader.data as web
    import pandas as pd
    import datetime as dt
    df = web.DataReader('GE', 'yahoo', start='2019-09-10', end='2019-10-09')

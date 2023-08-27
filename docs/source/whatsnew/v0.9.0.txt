@@ -23,7 +23,7 @@ Enhancements
 
 .. code-block:: shell
 
-   python -c "import pandas_datareader; pandas_datareader.test()"
+   python -c "import polars_datareader; polars_datareader.test()"
 
 .. _whatsnew_090.api_breaking:
 

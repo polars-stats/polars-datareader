@@ -1,8 +1,8 @@
 # .coveragerc to control coverage.py
 [run]
-source = pandas_datareader
+source = polars_datareader
 branch = True
-include = */pandas_datareader/*
+include = */polars_datareader/*
 omit =
     */_version.py
     */yahoo/*
@@ -18,7 +18,7 @@ exclude_lines =
     raise ImmediateDeprecationError
     # Ignore pass
     pass
-include = */pandas_datareader/*
+include = */polars_datareader/*
 omit =
     */_version.py
     */yahoo/*
