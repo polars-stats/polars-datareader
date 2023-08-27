@@ -1,6 +1,6 @@
 import datetime as dt
 
-import pandas as pd
+from polars import DataFrame, read_csv
 
 from polars_datareader.base import _DailyBaseReader
 from polars_datareader.compat import StringIO, binary_type, concat, is_list_like
@@ -43,7 +43,7 @@ class MoexReader(_DailyBaseReader):
         self.end_dt = self.end
         self.end = self.end.date()
 
-        if isinstance(self.symbols, pd.DataFrame):
+        if isinstance(self.symbols, DataFrame):
             self.symbols = self.symbols.index.tolist()
         elif not is_list_like(self.symbols):
             self.symbols = [self.symbols]
@@ -209,7 +209,7 @@ class MoexReader(_DailyBaseReader):
         """Read data from the primary board for each ticker"""
         markets_n_engines, boards = self._get_metadata()
         b = self.read_all_boards()
-        result = pd.DataFrame()
+        result = DataFrame()
         for secid in list(set(b["SECID"].tolist())):
             part = b[b["BOARDID"] == boards[secid]]
             result = result.append(part)
@@ -233,11 +233,10 @@ class MoexReader(_DailyBaseReader):
 
     def _read_lines(self, input):
         """Return a pandas DataFrame from input"""
-
-        return pd.read_csv(
+        return read_csv(
             input,
             index_col="TRADEDATE",
             parse_dates=True,
-            sep=";",
-            na_values=("-", "null"),
+            separator=";",
+            null_values=[]"-", "null"],
         )

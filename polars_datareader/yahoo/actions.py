@@ -1,4 +1,5 @@
-from pandas import DataFrame, MultiIndex
+from polars import DataFrame
+from pandas import MultiIndex
 
 from polars_datareader.compat import concat
 from polars_datareader.yahoo.daily import YahooDailyReader

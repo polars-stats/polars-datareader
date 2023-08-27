@@ -2,7 +2,7 @@ from datetime import datetime
 
 import numpy as np
 import pandas as pd
-from pandas import DataFrame, testing as tm
+from polars import DataFrame, testing as tm
 import pytest
 
 from polars_datareader import data as web
@@ -23,8 +23,8 @@ class TestFred:
         df = web.DataReader("GDP", "fred", start, end)
         ts = df["GDP"]
 
-        assert ts.index[0] == pd.to_datetime("2010-01-01")
-        assert ts.index[-1] == pd.to_datetime("2013-01-01")
+        assert ts.index[0] == datetime(2010, 1, 1)
+        assert ts.index[-1] == datetime(2013, 1, 1)
         assert ts.index.name == "DATE"
         assert ts.name == "GDP"
         assert len(ts) == 13

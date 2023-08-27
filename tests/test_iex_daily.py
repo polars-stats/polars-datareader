@@ -1,7 +1,8 @@
 from datetime import date, datetime, timedelta
 import os
 
-from pandas import DataFrame, MultiIndex
+from polars import DataFrame
+from pandas import MultiIndex
 import pytest
 
 from polars_datareader import data as web

@@ -2,7 +2,7 @@ from datetime import datetime
 from xml.etree import ElementTree
 
 import numpy as np
-from pandas import DataFrame, to_datetime
+from polars import DataFrame, col
 from six import string_types
 
 from polars_datareader.base import _DailyBaseReader
@@ -78,11 +78,10 @@ class NaverDailyReader(_DailyBaseReader):
         """
         resp = self._get_response(url, params=params)
         parsed = self._parse_xml_response(resp.text)
-        prices = DataFrame(
-            parsed, columns=["Date", "Open", "High", "Low", "Close", "Volume"]
+        prices = (
+            DataFrame(parsed, schema=["Date", "Open", "High", "Low", "Close", "Volume"])
+            .with_columns(col('Date').str.to_date())
         )
-        prices["Date"] = to_datetime(prices["Date"])
-        prices = prices.set_index("Date")
 
         # NOTE: See _get_params() for explanations.
         return prices[(prices.index >= self.start) & (prices.index <= self.end)]

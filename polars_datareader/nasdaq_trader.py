@@ -2,7 +2,7 @@ from ftplib import FTP, all_errors
 import time
 import warnings
 
-from pandas import read_csv
+from polars import read_csv
 
 from polars_datareader._utils import RemoteDataError
 from polars_datareader.compat import StringIO

@@ -1,11 +1,10 @@
-from __future__ import unicode_literals
-
 import collections
 from io import BytesIO
 import time
 import zipfile
 
 import pandas as pd
+from polars import DataFrame
 
 from polars_datareader.compat import HTTPError, str_to_bytes
 from polars_datareader.io.util import _read_content
@@ -89,7 +88,7 @@ def read_sdmx(path_or_buf, dtype="float64", dsd=None):
     mcols = _construct_index(keys, dsd=dsd)
     mseries = _construct_series(obss, name=idx_name, dsd=dsd)
 
-    df = pd.DataFrame(mseries, dtype=dtype)
+    df = DataFrame(mseries, dtype=dtype)
     df = df.T
     df.columns = mcols
 

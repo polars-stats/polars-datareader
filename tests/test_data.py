@@ -1,4 +1,4 @@
-from pandas import DataFrame
+from polars import DataFrame
 import pytest
 
 from polars_datareader.data import DataReader

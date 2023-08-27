@@ -2,7 +2,7 @@ import json
 import time
 import warnings
 
-from pandas import DataFrame, Series, concat, to_datetime
+from polars import DataFrame, Series, concat, from_epoch
 
 from polars_datareader._utils import RemoteDataError, SymbolWarning
 from polars_datareader.compat import string_types
@@ -87,7 +87,7 @@ class YahooFXReader(YahooDailyReader):
 
         data = jsn["chart"]["result"][0]
         df = DataFrame(data["indicators"]["quote"][0])
-        df.insert(0, "date", to_datetime(Series(data["timestamp"]), unit="s").dt.date)
+        df.insert(0, "date", to_datetime(from_epoch(data["timestamp"]), unit="s").dt.date)
         df.columns = map(str.capitalize, df.columns)
         return df
 

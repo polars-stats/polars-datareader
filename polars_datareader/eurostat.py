@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import pandas as pd
 
 from polars_datareader.base import _BaseReader

@@ -1,6 +1,8 @@
+from datetime import datetime
+
 import numpy as np
 import pandas as pd
-from pandas import testing as tm
+from polars import DataFrame, Series, testing as tm
 import pytest
 
 from polars_datareader import data as web
@@ -15,10 +17,10 @@ class TestEurostat:
         df = web.DataReader(
             "ert_h_eur_a",
             "eurostat",
-            start=pd.Timestamp("2009-01-01"),
-            end=pd.Timestamp("2010-01-01"),
+            start=datetime(2009, 1, 1),
+            end=datetime(2010, 1, 1),
         )
-        assert isinstance(df, pd.DataFrame)
+        assert isinstance(df, DataFrame)
 
         currencies = ["Italian lira", "Lithuanian litas"]
         # cols = [(currency, "Average") for currency in currencies]
@@ -31,7 +33,7 @@ class TestEurostat:
         )
         exp_idx = pd.DatetimeIndex(["2009-01-01", "2010-01-01"], name="TIME_PERIOD")
         values = np.array([[1936.27, 3.4528], [1936.27, 3.4528]])
-        expected = pd.DataFrame(values, index=exp_idx, columns=exp_col)
+        expected = DataFrame(values, index=exp_idx, schema=exp_col)
         tm.assert_frame_equal(df_currency, expected)
 
     def test_get_sts_cobp_a(self):
@@ -39,11 +41,11 @@ class TestEurostat:
         df = web.DataReader(
             "sts_cobp_a",
             "eurostat",
-            start=pd.Timestamp("2000-01-01"),
-            end=pd.Timestamp("2013-01-01"),
+            start=datetime(2000, 1, 1),
+            end=datetime(2013, 1, 1),
         )
 
-        idx = pd.date_range("2000-01-01", "2013-01-01", freq="AS", name="TIME_PERIOD")
+        idx = pl.date_range("2000-01-01", "2013-01-01", freq="AS", name="TIME_PERIOD")
         ne_name = (
             "Building permits - m2 of useful floor area",
             "Index, 2010=100",
@@ -69,7 +71,7 @@ class TestEurostat:
             89.3,
             77.6,
         ]
-        ne = pd.Series(ne_values, name=ne_name, index=idx)
+        ne = Series(ne_name, ne_values, index=idx)
 
         uk_name = (
             "Building permits - m2 of useful floor area",
@@ -96,7 +98,7 @@ class TestEurostat:
             103.7,
             81.3,
         ]
-        uk = pd.Series(uk_values, name=uk_name, index=idx)
+        uk = Series(uk_name, uk_values, index=idx)
 
         for expected in [ne, uk]:
             expected.index.freq = None
@@ -109,8 +111,8 @@ class TestEurostat:
         df = web.DataReader(
             "nrg_pc_202",
             "eurostat",
-            start=pd.Timestamp("2010-01-01"),
-            end=pd.Timestamp("2013-01-01"),
+            start=datetime(2010, 1, 1),
+            end=datetime(2013, 1, 1),
         )
 
         name = (
@@ -136,10 +138,10 @@ class TestEurostat:
             ],
             name="TIME_PERIOD",
         )
-        exp = pd.Series(
+        exp = Series(
+            name,
             [27.1403, 27.5854, 26.5285, 27.2187, 28.5862, 28.6448, 26.8147, 26.4979],
             index=exp_index,
-            name=name,
         )
 
         tm.assert_series_equal(df[name], exp)
@@ -151,6 +153,6 @@ class TestEurostat:
             web.DataReader(
                 "prc_hicp_manr",
                 "eurostat",
-                start=pd.Timestamp("2000-01-01"),
-                end=pd.Timestamp("2013-01-01"),
+                start=datetime(2010, 1, 1),
+                end=datetime(2013, 1, 1),
             )

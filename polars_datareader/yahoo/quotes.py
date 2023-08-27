@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import json
 
-from pandas import DataFrame
+from polars import DataFrame
 
 from polars_datareader.base import _BaseReader
 from polars_datareader.compat import string_types
@@ -15,7 +15,6 @@ _DEFAULT_PARAMS = {
 
 
 class YahooQuotesReader(_BaseReader):
-
     """Get current yahoo quote"""
 
     def __init__(

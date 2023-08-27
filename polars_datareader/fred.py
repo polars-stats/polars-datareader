@@ -1,4 +1,4 @@
-from pandas import concat, read_csv
+from polars import concat, read_csv
 
 from polars_datareader.base import _BaseReader
 from polars_datareader.compat import is_list_like

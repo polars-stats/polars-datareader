@@ -3,7 +3,8 @@ import json
 import warnings
 
 import numpy as np
-from pandas import DataFrame, DatetimeIndex, MultiIndex, Series, concat, to_datetime
+from polars import DataFrame, Series, concat
+from pandas import DatetimeIndex, MultiIndex, to_datetime
 from pandas.io.json import read_json
 from pandas.tseries.offsets import MonthEnd
 

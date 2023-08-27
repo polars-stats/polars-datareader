@@ -1,4 +1,4 @@
-from pandas import DataFrame
+from polars import DataFrame
 from pandas.io.common import urlopen
 
 from polars_datareader.exceptions import DEP_ERROR_MSG, ImmediateDeprecationError
