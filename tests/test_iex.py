@@ -14,7 +14,7 @@ from polars_datareader.data import (
 from polars_datareader.exceptions import UnstableAPIWarning
 
 
-class TestIEX(object):
+class TestIEX:
     @classmethod
     def setup_class(cls):
         pytest.importorskip("lxml")

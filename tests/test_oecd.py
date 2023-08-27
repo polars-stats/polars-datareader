@@ -9,7 +9,7 @@ from polars_datareader import data as web
 from polars_datareader._utils import RemoteDataError
 
 
-class TestOECD(object):
+class TestOECD:
     @pytest.mark.xfail(reason="Incorrect URL")
     def test_get_un_den(self):
         df = web.DataReader(

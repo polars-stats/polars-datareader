@@ -1,8 +1,8 @@
 from datetime import datetime
 
 import numpy as np
-import pandas as pd
-from pandas import DataFrame, testing as tm
+import polars as pl
+from polars import DataFrame, testing as tm
 import pytest
 import requests
 from requests.exceptions import ConnectionError
@@ -17,7 +17,7 @@ XFAIL_REASON = "Known connection failures on Yahoo when testing!"
 pytestmark = pytest.mark.stable
 
 
-class TestYahoo(object):
+class TestYahoo:
     @classmethod
     def setup_class(cls):
         pytest.importorskip("lxml")
@@ -42,7 +42,7 @@ class TestYahoo(object):
         fields = ["exchange", "sharesOutstanding", "epsForward"]
         try:
             AAPL = web.get_quote_yahoo("AAPL")
-            df = web.get_quote_yahoo(pd.Series(stringlist))
+            df = web.get_quote_yahoo(pl.Series(stringlist))
         except ConnectionError:
             pytest.xfail(reason=XFAIL_REASON)
         tm.assert_series_equal(AAPL.iloc[0][fields], df.loc["AAPL"][fields])
@@ -54,7 +54,7 @@ class TestYahoo(object):
         except ConnectionError:
             pytest.xfail(reason=XFAIL_REASON)
 
-        assert not pd.isnull(df["marketCap"][0])
+        assert not df['marketCap'][0].is_null()
 
     def test_get_quote_stringlist(self):
         stringlist = ["GOOG", "AAPL"]
@@ -76,13 +76,13 @@ class TestYahoo(object):
     )
     def test_get_components_dow_jones(self):  # pragma: no cover
         df = web.get_components_yahoo("^DJI")  # Dow Jones
-        assert isinstance(df, pd.DataFrame)
+        assert isinstance(df, pl.DataFrame)
         assert len(df) == 30
 
     @pytest.mark.skip("Unreliable test, receive partial " "components back for dax")
     def test_get_components_dax(self):  # pragma: no cover
         df = web.get_components_yahoo("^GDAXI")  # DAX
-        assert isinstance(df, pd.DataFrame)
+        assert isinstance(df, pl.DataFrame)
 
         assert len(df) == 30
         assert df[df.name.str.contains("adidas", case=False)].index == "ADS.DE"
@@ -95,7 +95,7 @@ class TestYahoo(object):
         # return false because the link is invalid
 
         df = web.get_components_yahoo("^NDX")  # NASDAQ-100
-        assert isinstance(df, pd.DataFrame)
+        assert isinstance(df, pl.DataFrame)
 
         if len(df) > 1:
             # Usual culprits, should be around for a while
@@ -257,7 +257,7 @@ class TestYahoo(object):
             ]
         )
 
-        exp = pd.DataFrame(
+        exp = pl.DataFrame(
             {
                 "action": [
                     "DIVIDEND",
@@ -298,7 +298,7 @@ class TestYahoo(object):
         # where dividends are not adjusted for splits
         result = web.get_data_yahoo_actions("AAPL", start, end, adjust_dividends=False)
 
-        exp = pd.DataFrame(
+        exp = pl.DataFrame(
             {
                 "action": [
                     "DIVIDEND",
@@ -347,7 +347,7 @@ class TestYahoo(object):
             ["2018-12-28", "2018-09-27", "2018-06-28", "2018-03-28"]
         )
 
-        exp = pd.DataFrame(
+        exp = pl.DataFrame(
             {
                 "action": ["DIVIDEND", "DIVIDEND", "DIVIDEND", "DIVIDEND"],
                 "value": [0.43, 0.40, 0.40, 0.40],

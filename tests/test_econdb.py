@@ -8,7 +8,7 @@ from polars_datareader import data as web
 pytestmark = pytest.mark.stable
 
 
-class TestEcondb(object):
+class TestEcondb:
     def test_infer_start_end_from_symbols(self):
         df = web.DataReader(
             (

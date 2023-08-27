@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 import warnings
 
 import numpy as np
-from pandas import DataFrame, concat, read_csv
+from polars import DataFrame, concat, read_csv
 import requests
 
 from polars_datareader._utils import (
@@ -22,7 +22,7 @@ from polars_datareader.compat import (
 )
 
 
-class _BaseReader(object):
+class _BaseReader:
     """
     Parameters
     ----------

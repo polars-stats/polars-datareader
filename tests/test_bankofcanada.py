@@ -8,7 +8,7 @@ from polars_datareader._utils import RemoteDataError
 pytestmark = pytest.mark.stable
 
 
-class TestBankOfCanada(object):
+class TestBankOfCanada:
     @staticmethod
     def get_symbol(currency_code, inverted=False):
         if inverted:

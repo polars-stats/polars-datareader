@@ -5,7 +5,7 @@ import pytest
 from polars_datareader import DataReader
 
 
-class TestNaver(object):
+class TestNaver:
     @pytest.mark.parametrize(
         "symbol, start, end",
         [

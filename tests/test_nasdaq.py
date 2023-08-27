@@ -3,7 +3,7 @@ from polars_datareader._testing import skip_on_exception
 from polars_datareader._utils import RemoteDataError
 
 
-class TestNasdaqSymbols(object):
+class TestNasdaqSymbols:
     @skip_on_exception(RemoteDataError)
     def test_get_symbols(self):
         symbols = web.DataReader("symbols", "nasdaq")

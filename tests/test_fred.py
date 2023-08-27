@@ -11,7 +11,7 @@ from polars_datareader._utils import RemoteDataError
 pytestmark = pytest.mark.stable
 
 
-class TestFred(object):
+class TestFred:
     def test_fred(self):
 
         # Raises an exception when DataReader can't
