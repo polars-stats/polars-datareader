@@ -33,14 +33,22 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.3.0"
+    "black",
+    "flake8-bugbear",
+    "coverage",
+    "codecov",
+    "coveralls",
+    "flake8",
+    "pytest",
+    "pytest-xdist",
+    "pytest-cov",
+    "wrapt",
 ]
 
 [project.urls]
-"Bug Tracker" = https://github.com/pydata/pandas-datareader/issues
-"Documentation" = http://pydata.github.io/pandas-datareader
-"Source Code" = https://github.com/pydata/pandas-datareader
+"Bug Tracker" = "https://github.com/polars-stats/polars-datareader/issues"
+"Source Code" = "https://github.com/polars-stats/polars-datareader"
 
 [tool.setuptools.packages.find]
-include = ["polars-datareader"]
+include = ["polars_datareader"]
 exclude = ["contrib", "docs", "tests*"]

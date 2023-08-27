@@ -14,7 +14,7 @@
 # serve to show the default.
 import datetime as dt
 
-import pandas_datareader as pdr
+import polars_datareader as pdr
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
