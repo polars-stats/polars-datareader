@@ -34,7 +34,7 @@ class EnigmaReader(_BaseReader):
     Download current snapshot for the following Florida Inspections Dataset:
     https://public.enigma.com/datasets/bedaf052-5fcd-4758-8d27-048ce8746c6a
 
-    >>> import pandas_datareader as pdr
+    >>> import polars_datareader as pdr
     >>> df = pdr.get_data_enigma('bedaf052-5fcd-4758-8d27-048ce8746c6a')
 
     In the event that ENIGMA_API_KEY does not exist in your env, the key can
