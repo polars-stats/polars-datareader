@@ -1,10 +1,9 @@
-from __future__ import division
-
 import json
 import re
 import time
 
-from pandas import DataFrame, isnull, notnull, to_datetime
+import polars as pl
+from polars import DataFrame, col
 
 from polars_datareader._utils import RemoteDataError
 from polars_datareader.base import _DailyBaseReader
@@ -158,7 +157,7 @@ class YahooDailyReader(_DailyBaseReader):
         # price data
         prices = DataFrame(data["prices"])
         prices.columns = [col.capitalize() for col in prices.columns]
-        prices["Date"] = to_datetime(to_datetime(prices["Date"], unit="s").dt.date)
+        prices = prices.with_columns(pl.from_epoch('Date', unit='s').dt.date)
 
         if "Data" in prices.columns:
             prices = prices[prices["Data"].isnull()]
@@ -176,18 +175,18 @@ class YahooDailyReader(_DailyBaseReader):
         # dividends & splits data
         if self.get_actions and data["eventsData"]:
 
-            actions = DataFrame(data["eventsData"])
+            actions = DataFrame(data['eventsData'])
             actions.columns = [col.capitalize() for col in actions.columns]
-            actions["Date"] = to_datetime(
-                to_datetime(actions["Date"], unit="s").dt.date
+            actions = actions.with_columns(
+                pl.from_epoch('Date', unit='s').dt.date
             )
 
             types = actions["Type"].unique()
             if "DIVIDEND" in types:
-                divs = actions[actions.Type == "DIVIDEND"].copy()
+                divs = actions.filter(col('Type') == 'DIVIDEND')
                 divs = divs[["Date", "Amount"]].reset_index(drop=True)
                 divs = divs.set_index("Date")
-                divs = divs.rename(columns={"Amount": "Dividends"})
+                divs = divs.rename({"Amount": "Dividends"})
                 prices = prices.join(divs, how="outer")
 
             if "SPLIT" in types:
@@ -202,7 +201,7 @@ class YahooDailyReader(_DailyBaseReader):
                     else:
                         return 1
 
-                splits = actions[actions.Type == "SPLIT"].copy()
+                splits = actions.filter(col('Type') == 'SPLIT')
                 splits["SplitRatio"] = splits.apply(split_ratio, axis=1)
                 splits = splits.reset_index(drop=True)
                 splits = splits.set_index("Date")
@@ -242,7 +241,7 @@ def _calc_return_index(price_df):
     (typically NaN) is set to 1.
     """
     df = price_df.pct_change().add(1).cumprod()
-    mask = notnull(df.iloc[1]) & isnull(df.iloc[0])
+    mask = df[1].is_not_null() & df[0].is_null()
     if mask:
         df.loc[df.index[0]] = 1
 
