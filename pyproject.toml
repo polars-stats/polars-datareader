@@ -41,3 +41,4 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = ["polars-datareader"]
+exclude = ["contrib", "docs", "tests*"]
