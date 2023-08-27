@@ -28,7 +28,6 @@ __all__ = [
     "lmap",
     "lrange",
     "concat",
-    "reduce",
 ]
 
 
