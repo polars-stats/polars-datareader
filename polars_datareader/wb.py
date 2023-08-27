@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import warnings
 
 import numpy as np
 import pandas as pd
+from polars import DataFrame
 
 from polars_datareader.base import _BaseReader
 from polars_datareader.compat import lrange, string_types
@@ -701,7 +700,7 @@ class WorldBankReader(_BaseReader):
         year = [x["date"] for x in data]
         value = [x["value"] for x in data]
         # Prepare output
-        df = pd.DataFrame([country, iso_code, year, value]).T
+        df = DataFrame([country, iso_code, year, value]).T
         return df
 
     def get_countries(self):
@@ -724,7 +723,7 @@ class WorldBankReader(_BaseReader):
         resp = self._get_response(url)
         data = resp.json()[1]
 
-        data = pd.DataFrame(data)
+        data = DataFrame(data)
         data.adminregion = [x["value"] for x in data.adminregion]
         data.incomeLevel = [x["value"] for x in data.incomeLevel]
         data.lendingType = [x["value"] for x in data.lendingType]
@@ -737,7 +736,7 @@ class WorldBankReader(_BaseReader):
     def get_indicators(self):
         """Download information about all World Bank data series"""
         global _cached_series
-        if isinstance(_cached_series, pd.DataFrame):
+        if isinstance(_cached_series, DataFrame):
             return _cached_series.copy()
 
         url = WB_API_URL + "/indicators?per_page=50000&format=json"
@@ -745,7 +744,7 @@ class WorldBankReader(_BaseReader):
         resp = self._get_response(url)
         data = resp.json()[1]
 
-        data = pd.DataFrame(data)
+        data = DataFrame(data)
         # Clean fields
         data.source = [x["value"] for x in data.source]
 
